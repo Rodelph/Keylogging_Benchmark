@@ -1,0 +1,6 @@
+build/*
+Client/build/*
+Server/build/*
+Crypto/build/*
+Keylogger/build/*
+.vscode
