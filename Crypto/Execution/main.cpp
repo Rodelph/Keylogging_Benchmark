@@ -15,20 +15,29 @@ void benchmark_aes()
     const unsigned char key[AES_BLOCK_SIZE] = "0123456789abcde";
     unsigned char iv[AES_BLOCK_SIZE] = "fedcba98765430";
     FILE *myFile;
-    myFile = fopen("text.txt", "r");
+    myFile = fopen("kek.txt", "r");
 
     if (myFile == NULL)
     {
         printf("Error Reading File\n");
         exit(1);
     }
-    unsigned char plaintext[BUF_SIZE];
 
-    for (int i = 0; i < BUF_SIZE; i++)
+    if (fseek(myFile, 0, SEEK_END) < 0) {
+        fclose(myFile);
+    }
+    long size = ftell(myFile);
+
+    std::cout << "The file size is : " << size << std::endl;
+    //const long size = ftell(myFile);
+    unsigned char* plaintext = (unsigned char*)malloc(size);
+    for (long i = 0; i < size; i++)
     {
         fscanf(myFile, "%s", &plaintext[i]);
     }
+
     fclose(myFile);
+
     unsigned char ciphertext[BUF_SIZE];
     unsigned char decryptedtext[BUF_SIZE];
     int cipher_len, decrypted_len;
@@ -37,7 +46,7 @@ void benchmark_aes()
     AES_set_encrypt_key(key, 128, &aes_key);
 
     auto startenc = std::chrono::high_resolution_clock::now();
-    AES_cbc_encrypt(plaintext, ciphertext, strlen((const char*)plaintext), &aes_key, iv, AES_ENCRYPT);
+    AES_cbc_encrypt((const unsigned char*)plaintext, ciphertext, strlen((const char*)plaintext), &aes_key, iv, AES_ENCRYPT);
     auto endenc = std::chrono::high_resolution_clock::now();
 
     std::cout << "AES encryption time: "<< endenc - startenc << std::endl;
@@ -51,7 +60,8 @@ void benchmark_aes()
     decrypted_len = strlen((const char*)decryptedtext);
     decryptedtext[decrypted_len] = '\0';
 
-    std::cout << "AES encryption time: "<< enddec - startdec << std::endl;
+    std::cout << "AES decryption time: "<< enddec - startdec << std::endl;
+    free((unsigned char*)plaintext);
 }
 
 void benchmark_blowfish()
@@ -59,19 +69,26 @@ void benchmark_blowfish()
     const unsigned char key[16] = "0123456789abcde";
     unsigned char iv[BF_BLOCK] = {0xfe, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10};
     FILE *myFile;
-    myFile = fopen("text.txt", "r");
+    myFile = fopen("kek.txt", "r");
 
     if (myFile == NULL)
     {
         printf("Error Reading File\n");
         exit(1);
     }
-    unsigned char plaintext[BUF_SIZE];
+    if (fseek(myFile, 0, SEEK_END) < 0) {
+        fclose(myFile);
+    }
+    long size = ftell(myFile);
 
-    for (int i = 0; i < BUF_SIZE; i++)
+    std::cout << "The file size is : " << size << std::endl;
+
+    unsigned char* plaintext = (unsigned char*)malloc(size);
+    for (long i = 0; i < size; i++)
     {
         fscanf(myFile, "%s", &plaintext[i]);
     }
+
     fclose(myFile);
     unsigned char ciphertext[BUF_SIZE];
     unsigned char decryptedtext[BUF_SIZE];
@@ -96,6 +113,7 @@ void benchmark_blowfish()
     decryptedtext[decrypted_len] = '\0';
 
     std::cout << "Blowfish decryption time: "<< enddec - startdec << std::endl;
+    free((unsigned char*)plaintext);
 }
 
 void welcome_screen()
@@ -132,6 +150,10 @@ int main(int argc, char* argv[])
                 std::cout << "Please select 1 or 2" <<std::endl;
                 break;
         }
+    }
+    else
+    {
+        std::cout << "Please select 1 or 2" <<std::endl;
     }
 
     return 0;

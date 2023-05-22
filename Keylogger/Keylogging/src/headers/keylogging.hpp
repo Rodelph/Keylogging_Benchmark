@@ -29,12 +29,11 @@
 #define VK_CAPITAL        0x14
 
 #define VK_KANA           0x15
-#define VK_HANGEUL        0x15  /* old name - should be here for compatibility */
+#define VK_HANGEUL        0x15
 #define VK_HANGUL         0x15
 #define VK_JUNJA          0x17
 #define VK_FINAL          0x18
 #define VK_HANJA          0x19
-#define VK_KANJI          0x19
 
 #define VK_ESCAPE         0x1B
 

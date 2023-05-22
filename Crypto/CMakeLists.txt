@@ -11,6 +11,4 @@ set(CMAKE_C_STANDARD_REQUIRED TRUE)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-add_subdirectory(Decrypt)
-add_subdirectory(Encrypt)
 add_subdirectory(Execution)
