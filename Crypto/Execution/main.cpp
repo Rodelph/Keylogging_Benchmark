@@ -8,9 +8,7 @@
 #include <openssl/aes.h>
 #include <openssl/blowfish.h>
 
-#define KEY_SIZE 256
-
-void benchmark_aes()
+void benchmark_aes(int key_bits)
 {
     const unsigned char key[AES_BLOCK_SIZE] = "0123456789abcde";
     unsigned char iv[AES_BLOCK_SIZE] = "fedcba98765430";
@@ -28,7 +26,7 @@ void benchmark_aes()
     }
     long size = ftell(myFile);
 
-    std::cout << "The file size is : " << size << std::endl;
+    std::cout << "The file size is : " << size << " bytes" << std::endl;
 
     unsigned char* plaintext = (unsigned char*)malloc(size);
     fread(plaintext, 1, size, myFile);
@@ -40,15 +38,15 @@ void benchmark_aes()
     int cipher_len, decrypted_len;
 
     AES_KEY aes_key;
-    AES_set_encrypt_key(key, KEY_SIZE, &aes_key);
+    AES_set_encrypt_key(key, key_bits, &aes_key);
 
     auto startenc = std::chrono::high_resolution_clock::now();
     AES_cbc_encrypt((const unsigned char*)plaintext, ciphertext, size, &aes_key, iv, AES_ENCRYPT);
     auto endenc = std::chrono::high_resolution_clock::now();
-
-    std::cout << "AES encryption time: "<< endenc - startenc << std::endl;
+    std::chrono::duration<double> diffenc = endenc - startenc;
+    std::cout << "AES encryption time: "<< diffenc.count() * 1000 << " ms" << std::endl;
     cipher_len = strlen((const char*)ciphertext);
-    AES_set_decrypt_key(key, KEY_SIZE, &aes_key);
+    AES_set_decrypt_key(key, key_bits, &aes_key);
 
     auto startdec = std::chrono::high_resolution_clock::now();
     AES_cbc_encrypt(ciphertext, decryptedtext, size, &aes_key, iv, AES_DECRYPT);
@@ -56,14 +54,14 @@ void benchmark_aes()
 
     decrypted_len = strlen((const char*)decryptedtext);
     decryptedtext[decrypted_len] = '\0';
-
-    std::cout << "AES decryption time: "<< enddec - startdec << std::endl;
+    std::chrono::duration<double> diffdec = enddec - startdec;
+    std::cout << "AES decryption time: "<< diffdec.count() * 1000 << " ms" << std::endl;
     free((unsigned char*)plaintext);
     free(decryptedtext);
     free(ciphertext);
 }
 
-void benchmark_blowfish()
+void benchmark_blowfish(int key_bits)
 {
     const unsigned char key[16] = "0123456789abcde";
     unsigned char iv[BF_BLOCK] = {0xfe, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10};
@@ -80,7 +78,7 @@ void benchmark_blowfish()
     }
     long size = ftell(myFile);
 
-    std::cout << "The file size is : " << size << std::endl;
+    std::cout << "The file size is : " << size << " bytes" << std::endl;
 
     unsigned char* plaintext = (unsigned char*)malloc(size);
     fread(plaintext, 1, size, myFile);
@@ -92,15 +90,15 @@ void benchmark_blowfish()
     int cipher_len, decrypted_len;
     
     BF_KEY bf_key;
-    BF_set_key(&bf_key, 16, (unsigned char*)key);
+    BF_set_key(&bf_key, key_bits, (unsigned char*)key);
 
     auto startenc = std::chrono::high_resolution_clock::now();
     BF_cbc_encrypt(plaintext, ciphertext, size, &bf_key, iv, BF_ENCRYPT);
     auto endenc = std::chrono::high_resolution_clock::now();
-
-    std::cout << "Blowfish encryption time: "<< endenc - startenc << std::endl;
+    std::chrono::duration<double> diffenc = endenc - startenc;
+    std::cout << "Blowfish encryption time: "<< diffenc.count() * 1000 << " ms" << std::endl;
     cipher_len = strlen((const char*)ciphertext);
-    BF_set_key(&bf_key, 16, (unsigned char*)key);
+    BF_set_key(&bf_key, key_bits, (unsigned char*)key);
 
     auto startdec = std::chrono::high_resolution_clock::now();
     BF_cbc_encrypt(ciphertext, decryptedtext, size, &bf_key, iv, BF_DECRYPT);
@@ -108,8 +106,8 @@ void benchmark_blowfish()
 
     decrypted_len = strlen((const char*)decryptedtext);
     decryptedtext[decrypted_len] = '\0';
-
-    std::cout << "Blowfish decryption time: "<< enddec - startdec << std::endl;
+    std::chrono::duration<double> diffdec = enddec - startdec;
+    std::cout << "Blowfish decryption time: "<< diffdec.count() * 1000 << " ms" << std::endl;
     free((unsigned char*)plaintext);
     free(decryptedtext);
     free(ciphertext);
@@ -138,11 +136,11 @@ int main(int argc, char* argv[])
         switch(selected_val)
         {
             case 1 :
-                benchmark_aes();
+                benchmark_aes(atoi(argv[2]));
                 break;
             
             case 2 :
-                benchmark_blowfish();
+                benchmark_blowfish(atoi(argv[2]));
                 break;
             
             default :
