@@ -1,0 +1,105 @@
+*------------------------------------ Algorithm Benchmarking -------------------------------------*
+|                                                                                                 |
+|                                   Project made by :                                             |
+|                                                                                                 |
+|                                             Amine Naqi                                          |
+|                                                                                                 |
+|                                             Peter Koegler                                       |
+|                                                                                                 |
+*-------------------------------------------------------------------------------------------------*
+The file size is : 2069406 bytes
+AES encryption time: 9.8145 ms
+AES decryption time: 9.1055 ms
+*------------------------------------ Algorithm Benchmarking -------------------------------------*
+|                                                                                                 |
+|                                   Project made by :                                             |
+|                                                                                                 |
+|                                             Amine Naqi                                          |
+|                                                                                                 |
+|                                             Peter Koegler                                       |
+|                                                                                                 |
+*-------------------------------------------------------------------------------------------------*
+The file size is : 2069406 bytes
+AES encryption time: 12.0765 ms
+AES decryption time: 10.7729 ms
+*------------------------------------ Algorithm Benchmarking -------------------------------------*
+|                                                                                                 |
+|                                   Project made by :                                             |
+|                                                                                                 |
+|                                             Amine Naqi                                          |
+|                                                                                                 |
+|                                             Peter Koegler                                       |
+|                                                                                                 |
+*-------------------------------------------------------------------------------------------------*
+The file size is : 2069406 bytes
+AES encryption time: 13.0822 ms
+AES decryption time: 12.6233 ms
+*------------------------------------ Algorithm Benchmarking -------------------------------------*
+|                                                                                                 |
+|                                   Project made by :                                             |
+|                                                                                                 |
+|                                             Amine Naqi                                          |
+|                                                                                                 |
+|                                             Peter Koegler                                       |
+|                                                                                                 |
+*-------------------------------------------------------------------------------------------------*
+The file size is : 2069406 bytes
+Blowfish encryption time: 15.9518 ms
+Blowfish decryption time: 15.5801 ms
+*------------------------------------ Algorithm Benchmarking -------------------------------------*
+|                                                                                                 |
+|                                   Project made by :                                             |
+|                                                                                                 |
+|                                             Amine Naqi                                          |
+|                                                                                                 |
+|                                             Peter Koegler                                       |
+|                                                                                                 |
+*-------------------------------------------------------------------------------------------------*
+The file size is : 2069406 bytes
+Blowfish encryption time: 16.242 ms
+Blowfish decryption time: 15.6102 ms
+*------------------------------------ Algorithm Benchmarking -------------------------------------*
+|                                                                                                 |
+|                                   Project made by :                                             |
+|                                                                                                 |
+|                                             Amine Naqi                                          |
+|                                                                                                 |
+|                                             Peter Koegler                                       |
+|                                                                                                 |
+*-------------------------------------------------------------------------------------------------*
+The file size is : 2069406 bytes
+Blowfish encryption time: 15.6916 ms
+Blowfish decryption time: 14.9687 ms
+*------------------------------------ Algorithm Benchmarking -------------------------------------*
+|                                                                                                 |
+|                                   Project made by :                                             |
+|                                                                                                 |
+|                                             Amine Naqi                                          |
+|                                                                                                 |
+|                                             Peter Koegler                                       |
+|                                                                                                 |
+*-------------------------------------------------------------------------------------------------*
+The file size is : 2069406 bytes
+Blowfish encryption time: 16.015 ms
+Blowfish decryption time: 15.6947 ms
+*------------------------------------ Algorithm Benchmarking -------------------------------------*
+|                                                                                                 |
+|                                   Project made by :                                             |
+|                                                                                                 |
+|                                             Amine Naqi                                          |
+|                                                                                                 |
+|                                             Peter Koegler                                       |
+|                                                                                                 |
+*-------------------------------------------------------------------------------------------------*
+The file size is : 2069406 bytes
+Blowfish encryption time: 16.0769 ms
+Blowfish decryption time: 17.368 ms
+
+6780
+6784
+6780
+6784
+6788
+6780
+6780
+6784
