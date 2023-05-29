@@ -26,3 +26,7 @@ https://en.wikipedia.org/wiki/Blowfish_(cipher)
 https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
 
 https://github.com/openssl/openssl
+
+To download openssl library on windows, follow this guide.
+
+https://thesecmaster.com/procedure-to-install-openssl-on-the-windows-platform/
